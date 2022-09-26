@@ -1,0 +1,100 @@
+    	<script src="public/smarty/js/vendors/bootstrap.bundle.min.js"></script>
+		<script src="public/smarty/js/vendors/jquery.sparkline.min.js"></script>
+		<script src="public/smarty/js/vendors/selectize.min.js"></script>
+		<script src="public/smarty/js/vendors/jquery.tablesorter.min.js"></script>
+		<script src="public/smarty/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+		<script src="public/smarty/js/vendors/jquery-jvectormap-de-merc.js"></script>
+		<script src="public/smarty/js/vendors/jquery-jvectormap-world-mill.js"></script>
+		<script src="public/smarty/js/vendors/circle-progress.min.js"></script>
+		<script src="public/smarty/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="public/smarty/js/core.js"></script>
+		<script type="text/javascript" src="public/smarty/plugins/jquery-toast/js/jquery.toast.js"></script>
+		<script src="public/smarty/plugins/emoji-picker/lib/js/config.js"></script>
+		<script src="public/smarty/plugins/emoji-picker/lib/js/util.js"></script>
+		<script src="public/smarty/plugins/emoji-picker/lib/js/jquery.emojiarea.js"></script>
+		<script src="public/smarty/plugins/emoji-picker/lib/js/emoji-picker.js"></script>
+		<script src="public/smarty/plugins/flags/js/docs.js"></script>
+		<script src="public/smarty/js/chart_template.js"></script>
+		<script src="public/smarty/js/process.js"></script>
+		<script src="public/smarty/js/general.js"></script>
+
+		<footer class="footer footer_bottom dark">
+			<div class="container">
+				<div class="row align-items-center flex-row-reverse">
+					<div class="col-auto ml-lg-auto">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<ul class="list-inline mb-0">
+									<li class="list-inline-item"><a href="https://facebook.com/" target="_blank" class="btn btn-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+									</li>
+									<li class="list-inline-item"><a href="https://twitter.com/" target="_blank" class="btn btn-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+									</li>
+									<li class="list-inline-item"><a href="https://instagram.com/" target="_blank" class="btn btn-icon btn-instagram"><i class="fa fa-instagram"></i></a>
+									</li>
+									<li class="list-inline-item"><a href="https://pinterest.com/" target="_blank" class="btn btn-icon btn-pinterest"><i class="fa fa-pinterest"></i></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">Tüm Hakları Saklıdır © <a href="/">{{ site["site_name"] }}</a></div>
+				</div>
+			</div>
+		</footer>
+
+
+		  {% for script in scriptList %}
+  <script type="text/javascript" src="{{ script }}"></script>
+  {% endfor %}
+
+  {{ footerCode }}
+
+   {% for lang in site['languages'] %}
+    {% if lang['active'] %}
+     <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+     {% endif %}
+    {% endfor %}
+
+<script type="text/javascript">
+  var degree = 1800;
+  var clicks = 0;
+
+  $(document).ready(function(){
+    $('#spin').click(function(){
+      clicks ++;
+
+      var newDegree = degree*clicks;
+      var extraDegree = Math.floor(5 * 360 ) + 60;
+      totalDegree = newDegree+extraDegree;
+
+      $('#wheel .sec').each(function(){
+        var t = $(this);
+        var noY = 0;
+        
+        var c = 0;
+        var n = 700;  
+        var interval = setInterval(function () {
+          c++;          
+          if (c === n) { 
+            clearInterval(interval);        
+          } 
+          var aoY = t.offset().top;
+          if(aoY < 23.89){
+            $('#spin').addClass('spin');
+            setTimeout(function () { 
+              $('#spin').removeClass('spin');
+            }, 100);  
+          }
+        }, 10);
+        
+        $('#inner-wheel').css({
+          'transform' : 'rotate(' + totalDegree + 'deg)'      
+        });
+        
+        noY = t.offset().top;
+      });
+    }); 
+  });
+</script>
+</body>
+</html>

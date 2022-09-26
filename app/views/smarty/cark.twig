@@ -1,0 +1,51 @@
+{% include 'header.twig' %}
+{% if site["cark_status"]=="N" %}
+    <script language="javascript">window.location="/";</script>
+{% endif %}
+<div class="container">
+    <div class="row justify-content-center row-card statistics">
+        <div class="col-md-10 col-md-offset-2">
+          {% if user['balance'] < settings['cark_balance'] %}
+      <div class="alert alert-dismissible alert-danger">
+           <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>Sevgili @{{ user['username'] }}, </strong> <br>Çarkı bullanabilmeniz için en az {{ settings['cark_balance'] }} TL krediniz olması gereklidir..
+       </div>
+      {% endif %}
+
+      <div id="returndiv"></div>
+            <div id="wrapper" style="">
+                <div id="wheel">
+                    <div id="inner-wheel">
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount_2'] }} TL</span></div>
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount_3'] }} TL</span></div>
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount_4'] }} TL</span></div>
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount_5'] }} TL</span></div>
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount'] }} TL</span></div>
+                        <div class="sec"><span class="bizimcark">{{ settings['cark_amount_6'] }} TL</span></div>
+                    </div>       
+                    <div id="spin" role="spin_ajax" role-id="{{ user['client_id'] }}">
+                        <div id="inner-spin""></div>
+                    </div>
+
+                    <div id="shine"></div>
+                </div>
+                <div id="txt"></div>
+            </div>
+        </div>
+    </div>
+
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="row justify-content-center row-card statistics">
+      <div class="col-lg-12">
+        <div class="card p-4">
+          {{ contentText }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% include 'footer.twig' %}

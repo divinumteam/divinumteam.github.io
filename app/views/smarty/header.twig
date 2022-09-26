@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<base href="{{ site['url'] }}/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ title }}</title>
+	<meta name="keywords" content="{{ site['keywords'] }}">
+	<meta name="description" content="{{ site['description'] }}">
+	{% if site['favicon'] %}
+	<link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+	{% endif %}
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<link rel="stylesheet" href="public/smarty/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+	<script src="public/smarty/js/vendors/jquery-3.2.1.min.js"></script>
+	<link href="public/smarty/css/core.css" rel="stylesheet">
+	<link href="public/smarty/plugins/charts-c3/c3.css" rel="stylesheet">
+	<script src="public/smarty/plugins/charts-c3/d3.v3.min.js"></script>
+	<script src="public/smarty/plugins/charts-c3/c3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="public/smarty/plugins/jquery-toast/css/jquery.toast.css">
+	<link rel="stylesheet" href="public/smarty/plugins/boostrap/colors.css" id="theme-stylesheet">
+	<link rel="stylesheet" href="public/smarty/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" id="theme-stylesheet">
+	<link href="public/smarty/plugins/emoji-picker/lib/css/emoji.css" rel="stylesheet">
+	<link href="public/smarty/css/util.css" rel="stylesheet">
+	<link href="public/smarty/css/layout.css?v=2" rel="stylesheet">
+	<link href="public/smarty/css/footer.css" rel="stylesheet">
+
+</head>
+
+<body class="">
+	{% if user['auth'] %}
+	<div class="page">
+		<div class="page-main">
+			<!-- header -->
+			<div class="header top  py-4">
+				<div class="container">
+					<div class="d-flex">
+						<a style="max-height:40px;color:white;font-weight:550;" class="navbar-brand" href="{{ site['url'] }}">
+							{% if site["logo"] %}
+							<img src="{{ site['logo'] }}" alt="" title="">
+							{% else %}
+							{{ site["site_name"] }}
+							{% endif %}
+						</a>
+						<div class="d-flex order-lg-2 ml-auto my-auto">
+							<div class="dropdown">
+								<a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown"> <span class="avatar" style="background-image: url(public/smarty/images/user-avatar.png)"></span>
+									<span class="ml-2 d-none d-lg-block">
+										<span class="text-default text-white">{{ user['username'] }}</span>
+									</span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+									<a class="dropdown-item" href="account"> <i class="dropdown-icon fe fe-user"></i> {{ lang['account.title'] }}</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="logout"> <i class="dropdown-icon fe fe-log-out"></i> {{ lang['logout.title'] }}</a>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="header-toggler text-white d-lg-none ml-3 ml-lg-0 my-auto" data-toggle="collapse" data-target="#headerMenuCollapse"> <span class="header-toggler-icon"></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+
+			{% else %}
+
+			<div class="page">
+				<div class="page-main">
+					<!-- header -->
+					<div class="header top  py-4">
+						<div class="container">
+							<div class="d-flex">
+								<a style="max-height:40px;color:white;font-weight:550;" class="navbar-brand" href="{{ site['url'] }}">
+									{% if site["logo"] %}
+									<img src="{{ site['logo'] }}" alt="" title="">
+									{% else %}
+									{{ site["site_name"] }}
+									{% endif %}
+								</a>
+								<div class="d-flex order-lg-2 ml-auto my-auto">
+									<div class="dropdown">
+										<a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown"> <span class="avatar" style="background-image: url(public/smarty/images/user-avatar.png)"></span>
+											<span class="ml-2 d-none d-lg-block">
+												<span class="text-default text-white">{{ lang['signin.title'] }} / {{ lang['signup.title'] }}</span>
+											</span>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<a class="dropdown-item" href="signin"> <i class="dropdown-icon fe fe-log-in"></i> {{ lang['signin.title'] }}</a>
+											<a class="dropdown-item" href="signup"> <i class="dropdown-icon fe fe-user"></i> {{ lang['signup.title'] }}</a>
+										</div>
+									</div>
+								</div>
+								<a href="#" class="header-toggler text-white d-lg-none ml-3 ml-lg-0 my-auto" data-toggle="collapse" data-target="#headerMenuCollapse"> <span class="header-toggler-icon"></span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+						<div class="container">
+							<div class="row align-items-center">
+								<div class="col-lg order-lg-first">
+									<ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+										<li class="nav-item"> <a {% if active_menu == "/" %} class="nav-link active" {% endif %} href="{{ site['url'] }}/" class="nav-link "><i class="fa fa-home"></i>Anasayfa</a></li>
+										<li class="nav-item"> <a {% if active_menu == "services" %} class="nav-link active" {% endif %} href="{{ site['url'] }}/services" class="nav-link "><i class="fa fa-archive"></i>{{ lang['services.title'] }}</a></li>
+										<li class="nav-item"> <a {% if active_menu == "api" %} class="nav-link active" {% endif %} href="{{ site['url'] }}/api" class="nav-link "><i class="fe fe-share-2"></i>{{ lang['api.title'] }}</a></li>
+										<li class="nav-item"> <a {% if active_menu == "faq" %} class="nav-link active" {% endif %} href="{{ site['url'] }}/faq" class="nav-link "><i class="fa fa-question"></i>{{ lang['faq.title'] }}</a></li>
+										<li class="nav-item"> <a {% if active_menu == "terms" %} class="nav-link active" {% endif %} href="{{ site['url'] }}/terms" class="nav-link "><i class="fa fa-balance-scale"></i>{{ lang['terms.title'] }}</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
