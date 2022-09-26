@@ -1,0 +1,13 @@
+{
+    "name": "furatsmm/new-smmpanel",
+    "description": "FuratMedya tarafindan",
+    "type": "project",
+    "require": {
+        "twig/twig": "^2.5",
+        "phpmailer/phpmailer": "^6.0"
+    },
+    "authors": [{
+        "name": "furatmedya",
+        "email": "info@medyografya.com"
+    }]
+}
