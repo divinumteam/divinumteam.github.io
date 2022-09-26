@@ -1,1 +1,0 @@
-# divinumteam.github.io
